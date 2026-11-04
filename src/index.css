@@ -1,0 +1,77 @@
+@import 'tailwindcss';
+
+/*
+ * 테마 토큰: 디자인 시안의 미니멀 · 클래식 · 다크와 같은 값
+ * <html data-theme="classic|dark"> 로 전환
+ */
+:root {
+  --bg: #ffffff;
+  --rail: #f7f7f8;
+  --line: #e6e6e9;
+  --act: #f0f1f3;
+  --fg: #191919;
+  --sub: #636369;
+  --soft: #f7f7f8;
+  --chat: #ffffff;
+  --their: #f2f3f5;
+  --unread: #8a6d00;
+  --danger: #d93025;
+  --accent: #fee500;
+  --accent-fg: #191919;
+}
+
+[data-theme='classic'] {
+  --soft: #eaf0f5;
+  --chat: #b2c7d9;
+  --their: #ffffff;
+  --unread: #5a4700;
+}
+
+[data-theme='dark'] {
+  --bg: #1e1f22;
+  --rail: #161719;
+  --line: #2f3136;
+  --act: #2b2d31;
+  --fg: #ececee;
+  --sub: #a3a6ad;
+  --soft: #26272b;
+  --chat: #232428;
+  --their: #303238;
+  --unread: #fee500;
+  --danger: #ff8a80;
+}
+
+/* Tailwind 유틸리티로 노출: bg-bg, text-fg, border-line, bg-accent ... */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-rail: var(--rail);
+  --color-line: var(--line);
+  --color-act: var(--act);
+  --color-fg: var(--fg);
+  --color-sub: var(--sub);
+  --color-soft: var(--soft);
+  --color-chat: var(--chat);
+  --color-their: var(--their);
+  --color-unread: var(--unread);
+  --color-danger: var(--danger);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --font-sans: 'Noto Sans KR', system-ui, sans-serif;
+}
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-bg font-sans text-sm text-fg antialiased;
+  }
+  svg {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
