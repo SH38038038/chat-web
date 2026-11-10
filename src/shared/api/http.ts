@@ -71,6 +71,7 @@ export async function api<T>(path: string, options: ApiOptions = {}, retry = tru
   if (!res.ok) {
     throw new ApiError(res.status, await res.json().catch(() => null))
   }
-  if (res.status === 204) return undefined as T
-  return (await res.json()) as T
+  // 201처럼 본문 없이 성공하는 응답도 있으므로 빈 본문은 undefined로 처리
+  const text = await res.text()
+  return (text ? JSON.parse(text) : undefined) as T
 }

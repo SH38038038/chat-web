@@ -19,6 +19,19 @@ export async function login(req: LoginRequest) {
   useAuthStore.getState().setAccessToken(accessToken)
 }
 
+export interface SignupRequest {
+  email: string
+  phoneNumber: string
+  password: string
+  name: string
+  handle: string
+}
+
+/** 회원가입: 이메일과 전화번호 중 하나는 필수 (빈 문자열은 서버에서 null 처리) */
+export function signup(req: SignupRequest) {
+  return api<void>('/users', { method: 'POST', body: { ...req } })
+}
+
 export async function logout() {
   try {
     await api<void>('/auth/logout', { method: 'POST' })

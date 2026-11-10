@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router'
 import { RequireAuth } from '@/features/auth/ui/RequireAuth'
 import { AppLayout } from '@/app/AppLayout'
 import { LoginPage } from '@/pages/login/LoginPage'
+import { SignupPage } from '@/pages/signup/SignupPage'
 import { ChatListLayout } from '@/pages/chat/ChatListLayout'
 import { ChatEmptyPage } from '@/pages/chat/ChatEmptyPage'
 import { ChatRoomPage } from '@/pages/chat/ChatRoomPage'
@@ -11,6 +12,7 @@ import { NotFoundPage } from '@/pages/not-found/NotFoundPage'
 
 export const router = createBrowserRouter([
   { path: '/login', element: <LoginPage /> },
+  { path: '/signup', element: <SignupPage /> },
   {
     element: <RequireAuth />,
     children: [
