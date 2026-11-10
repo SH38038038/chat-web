@@ -27,7 +27,7 @@ export interface SignupRequest {
   handle: string
 }
 
-/** 회원가입: 이메일과 전화번호 중 하나는 필수 (빈 문자열은 서버에서 null 처리) */
+/** 회원가입: 이메일과 전화번호 중 하나는 필수. 전화번호는 E.164(+82...), 빈 문자열은 서버에서 null 처리 */
 export function signup(req: SignupRequest) {
   return api<void>('/users', { method: 'POST', body: { ...req } })
 }

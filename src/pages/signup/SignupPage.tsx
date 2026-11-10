@@ -3,6 +3,7 @@ import { useState, type FormEvent, type InputHTMLAttributes } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { signup, type SignupRequest } from '@/features/auth/api/authApi'
 import { ApiError } from '@/shared/api/http'
+import { toKrE164 } from '@/shared/lib/phone'
 
 const EMPTY: SignupRequest = { email: '', phoneNumber: '', password: '', name: '', handle: '' }
 
@@ -22,8 +23,17 @@ export function SignupPage() {
       setLocalError('이메일과 전화번호 중 하나는 입력해 주세요.')
       return
     }
+    let phoneNumber = ''
+    if (form.phoneNumber.trim()) {
+      const e164 = toKrE164(form.phoneNumber)
+      if (!e164) {
+        setLocalError('휴대폰 번호 형식이 올바르지 않아요. (예: 010-1234-5678)')
+        return
+      }
+      phoneNumber = e164
+    }
     setLocalError(null)
-    mutation.mutate(form)
+    mutation.mutate({ ...form, phoneNumber })
   }
 
   // ponytail: 서버가 중복 시 본문 없는 500을 주므로 원인을 구분할 수 없음. 서버가 409+메시지를 주면 그대로 노출
@@ -60,7 +70,7 @@ export function SignupPage() {
           label="전화번호"
           type="tel"
           autoComplete="tel"
-          maxLength={13}
+          maxLength={16}
           placeholder="010-0000-0000"
           {...field('phoneNumber')}
         />
