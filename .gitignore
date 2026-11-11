@@ -16,3 +16,12 @@ npm-debug.log*
 !.vscode/extensions.json
 .idea
 .DS_Store
+
+# IDE·도구 생성 파일
+.classpath
+.project
+.settings/
+bin/
+*.iml
+.omc/
+.superpowers/

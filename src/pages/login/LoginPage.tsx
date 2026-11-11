@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { useState, type FormEvent } from 'react'
-import { useLocation, useNavigate } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import { login } from '@/features/auth/api/authApi'
 import { ApiError } from '@/shared/api/http'
 
@@ -74,6 +74,10 @@ export function LoginPage() {
         >
           {mutation.isPending ? '로그인 중…' : '로그인'}
         </button>
+
+        <Link to="/signup" className="text-center text-[13px] text-sub hover:underline">
+          계정이 없나요? 회원가입
+        </Link>
       </form>
     </div>
   )
